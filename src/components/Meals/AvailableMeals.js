@@ -27,7 +27,7 @@ const DUMMY_MEALS = [
     price: 18.99,
   },
 ];
-const AvailableMeals = () => {
+const AvailableMeals = (props) => {
 
   return (
     <section className={ classess.meals }>
@@ -36,10 +36,12 @@ const AvailableMeals = () => {
           { DUMMY_MEALS.map((meal) =>
 
             <MealItem
-              key={ meal.id }
+              key={meal.id}
+              id={ meal.id }
               name={ meal.name }
               description={ meal.description }
               price={ meal.price }
+              
             />
           ) }
         </ul>
