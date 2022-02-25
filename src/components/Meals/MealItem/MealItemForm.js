@@ -13,7 +13,9 @@ const MealItemForm = (props) => {
     const enteredValue = itemRef.current.value
     const enterdValueNum = +enteredValue
     
-    if (enteredValue.trim().length === 0 || enterdValueNum < 1 || enterdValueNum > 5) {
+    if (enteredValue.trim().length === 0 ||
+      enterdValueNum < 1 ||
+      enterdValueNum > 5) {
         setEnteredNumValid(false)
         return
       }
@@ -43,7 +45,7 @@ const MealItemForm = (props) => {
         <button >
           + Add
         </button>
-        { !enteredNumValid && <p>Enter a valid number</p> }
+        { !enteredNumValid && <p>Enter a valid number(1-5)</p> }
       </form>
 
     )

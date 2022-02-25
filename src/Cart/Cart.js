@@ -2,34 +2,54 @@ import classes from './Cart.module.css'
 import Modal from '../UI/Modal'
 import CartContext from '../store/Cart-Context';
 import { useContext } from 'react';
-
+import CartItem from './CartItem';
 const Cart = (props) => {
-
-  let cartItems = []
   const cartItemsCxt = useContext(CartContext)
- console.log(cartItemsCxt.items,'final')
-  console.log('cartItems',cartItems)
-  //   .map((item) => (
-  //   <li key={ item.id }>{ item.name }</li>
-  // ))
+  const addCartItemHandler = (item) => {
+
+    cartItemsCxt.addItem({ ...item, amount: 1 })
+  }
+  const removeCartItemHandler = (id) => {
+cartItemsCxt.removeItem(id)
+  }
+  const cartItems = <ul className={ classes['cart-items'] }>
+
+    { cartItemsCxt.items.map((item) => (
+      <CartItem
+        key={ item.id }
+        name={ item.name }
+        price={ item.price }
+        amount={ item.amount }
+        onRemove={ removeCartItemHandler.bind(null, item.id) }
+        onAdd={ addCartItemHandler.bind(null, item) }
+      />
+    ))
+    }
+  </ul>
 
 
 
-return (
 
-  <Modal onCancel={ props.OncloseCart } >
-    { cartItems }
-    <div className={ classes.total }>
-      <span>Total Amount</span>
-      <span>35.62</span>
-    </div>
-    <div className={ classes.actions }>
-      <button className={ classes['button--alt'] } onClick={ props.OncloseCart }>Close</button>
-      <button className={ classes.button } >Order</button>
-    </div>
-  </Modal>
+  const totalAmount = `$${cartItemsCxt.totalAmount.toFixed(2)}`
 
-);
+  const hasItems = cartItemsCxt.items.length > 0
+  return (
+
+    < Modal
+      onCancel={ props.OncloseCart }
+    > { cartItems }
+      <div className={ classes.total } >
+        <span > Total Amount </span>
+        <span >{ totalAmount }</span>
+      </div>
+      <div className={ classes.actions } >
+        <button className={ classes['button--alt'] }
+          onClick={ props.OncloseCart } > Close </button>
+        { hasItems && <button className={ classes.button } > Order </button> }
+      </div>
+    </Modal>
+
+  );
 };
 
 export default Cart

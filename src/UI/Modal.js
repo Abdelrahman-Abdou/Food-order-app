@@ -23,11 +23,11 @@ const portalElement = document.getElementById('overLays')
 const Modal = (props) => {
   return (
 
-    <div onClick={ props.onCancel }>
-     
+    <div >
+
       { ReactDOM.createPortal(<BackDrop onClick={ props.onCancel }
-      
-      
+
+
       />, portalElement) };
 
       { ReactDOM.createPortal(<ModalOverlay>{ props.children }</ModalOverlay>, portalElement) }
