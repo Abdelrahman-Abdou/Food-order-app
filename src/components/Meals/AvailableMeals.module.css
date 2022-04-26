@@ -21,3 +21,17 @@
         transform: translateY(0);
     }
 }
+
+.loading {
+    width: 500px;
+    text-align: center;
+    color: white;
+    margin: auto;
+}
+
+.errorMsg {
+    width: 500px;
+    text-align: center;
+    color: red;
+    margin: auto;
+}
